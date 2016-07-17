@@ -2,7 +2,7 @@ package euler.utils
 
 import java.util.Date
 
-object Utils {
+object EulerUtils {
   val naturals: Stream[Int] = 1 #:: (naturals map {_ + 1})
 
   def calcOptionsPrism(numEdges: Int): Int = {
@@ -55,8 +55,8 @@ object Utils {
 
   def fullDecompose(num: Int): Map[Int, Int] = {
     //  More efficient than checking all numbers, apparently
-    val decomp = Utils.decompose(num)
-    (Utils.decompose(num) map { (x: Int) =>
+    val decomp = EulerUtils.decompose(num)
+    (EulerUtils.decompose(num) map { (x: Int) =>
       (x, decomp count {_ == x})
     }).toSet.toMap
   }
@@ -94,6 +94,10 @@ object Utils {
 
   def splitToDigits(num: Int): Seq[Int] = {
     num.toString.split("").map{_.toInt}
+  }
+
+  def readFileFromResources(fileName: String): Seq[String] = {
+    scala.io.Source.fromFile(s"src/resources/$fileName").mkString.split("\n")
   }
 
   private def isCoPrime(a: BigInt, b: BigInt): Boolean = gcd(a, b) == 1

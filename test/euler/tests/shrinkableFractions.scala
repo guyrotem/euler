@@ -1,6 +1,6 @@
 package euler.tests
 
-import euler.utils.Utils
+import euler.utils.EulerUtils
 
 /**
   * Created on 16/07/2016.
@@ -18,7 +18,7 @@ object ShrinkableFractions extends App {
   }
 
   def shrinkGcd(a: Int, b: Int) = {
-    (a / Utils.gcd(a, b), b / Utils.gcd(a, b))
+    (a / EulerUtils.gcd(a, b), b / EulerUtils.gcd(a, b))
   }
 
   val allFracs = for {

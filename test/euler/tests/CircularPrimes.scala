@@ -1,6 +1,6 @@
 package euler.tests
 
-import euler.utils.Utils
+import euler.utils.EulerUtils
 
 /**
   * Created on 16/07/2016.
@@ -14,7 +14,7 @@ object CircularPrimes extends App {
   }
 
   def isCircularPrime(num: Int): Boolean = {
-    generateAllCycles(num) forall Utils.sqrtPrimeCheck
+    generateAllCycles(num) forall EulerUtils.sqrtPrimeCheck
   }
 
   assert(isCircularPrime(7))

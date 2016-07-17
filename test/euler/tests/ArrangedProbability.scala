@@ -1,6 +1,6 @@
 package euler.tests
 
-import euler.utils.Utils
+import euler.utils.EulerUtils
 
 /**
   * Created on 16/07/2016.
@@ -8,7 +8,7 @@ import euler.utils.Utils
 object ArrangedProbability extends App {
   def isFiftyChance(blueDiscs: BigInt, redDiscs: BigInt): Boolean = {
     val chance = calcChance(blueDiscs, redDiscs)
-    Utils.shrinkNumbersBig(
+    EulerUtils.shrinkNumbersBig(
       chance._1,
       chance._2
     ) == (1, 2)

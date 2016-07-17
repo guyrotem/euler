@@ -1,6 +1,6 @@
 package euler.tests
 
-import euler.utils.Utils
+import euler.utils.EulerUtils
 
 /**
   * Created on 16/07/2016.
@@ -13,7 +13,7 @@ object SumFactorial extends App {
   }
 
   val ok = (3 to 2540160) filter {x =>
-    (Utils.splitToDigits(x) map factorial).sum == x
+    (EulerUtils.splitToDigits(x) map factorial).sum == x
   }
 
   println(ok)

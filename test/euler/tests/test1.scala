@@ -1,10 +1,12 @@
-package euler.utils
+package euler.tests
+
+import euler.utils.EulerUtils
 
 /**
   * Created on 15/07/2016.
   */
 class test1 {
-  Utils.decompose(998899)
+  EulerUtils.decompose(998899)
 
   def allDivisions(parts: Seq[Int]): Seq[(Int, Int)] = {
     def divide(ix: Int, amount: Int): (Int, Int) = {
@@ -48,7 +50,7 @@ class test1 {
 
   def numDivisors(num: Int): Int = {
     //  More efficient than checking all numbers, apparently
-    val decomp = Utils.fullDecompose(num)
+    val decomp = EulerUtils.fullDecompose(num)
     decomp.map(_._2 + 1).product
   }
 
@@ -78,7 +80,7 @@ object test1 extends App {
   val test = new test1
 
   val pal = for {pOpt <- (900000 to 999999).reverse
-       if test.isPalindrome(pOpt) && test.has3dig(test.allDivisions(Utils.decompose(pOpt)))}
+       if test.isPalindrome(pOpt) && test.has3dig(test.allDivisions(EulerUtils.decompose(pOpt)))}
     yield pOpt
 
   println(pal)

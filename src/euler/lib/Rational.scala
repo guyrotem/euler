@@ -1,6 +1,6 @@
 package euler.lib
 
-import euler.utils.Utils
+import euler.utils.EulerUtils
 
 /**
   * Created on 15/07/2016.
@@ -20,7 +20,7 @@ case class Rational(n: Int, d: Int) {
   }
 
   def shrink(): Rational = {
-    val shrunkList = Utils.shrinkNumbers(n, d)
+    val shrunkList = EulerUtils.shrinkNumbers(n, d)
     new Rational(shrunkList._1, shrunkList._2)
   }
 

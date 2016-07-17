@@ -1,6 +1,6 @@
 package euler.tests
 
-import euler.utils.Utils
+import euler.utils.EulerUtils
 
 /**
   * Created on 15/07/2016.
@@ -8,7 +8,7 @@ import euler.utils.Utils
 object FivePrimesSet extends App {
 
   def makePrimeStream(numbersStream: Stream[Int]) = {
-    numbersStream filter Utils.sqrtPrimeCheck
+    numbersStream filter EulerUtils.sqrtPrimeCheck
   }
 
   val naturals: Stream[Int] = 1 #:: (naturals map {_ + 1})
@@ -21,8 +21,8 @@ object FivePrimesSet extends App {
     try {
       primes match {
         case (a, b) =>
-          Utils.sqrtPrimeCheck((a.toString + b.toString).toInt) &&
-            Utils.sqrtPrimeCheck((b.toString + a.toString).toInt)
+          EulerUtils.sqrtPrimeCheck((a.toString + b.toString).toInt) &&
+            EulerUtils.sqrtPrimeCheck((b.toString + a.toString).toInt)
       }
     } catch {
       case e: Exception => false
@@ -70,8 +70,8 @@ object FivePrimesSet extends App {
     MultiPrimeSet(nextSeq, base.level + 1, base.source)
   }
 
-//  val limit = 50
-  val base1 = MultiPrimeSet(primeStream take 80 map {x => Set(x)} toSet, 1, primeStream take 3000 toList)
+//  find all prime sets made out of the 1st 3000 primes, containing at least 1 form the 1st 10
+  val base1 = MultiPrimeSet(primeStream take 10 map {x => Set(x)} toSet, 1, primeStream take 3000 toList)
   println(base1.primesSet.size)
   val base2 = extendAllGroups(base1)
   println(base2.primesSet.size)
@@ -81,4 +81,7 @@ object FivePrimesSet extends App {
   println(base4.primesSet.size)
   val base5 = extendAllGroups(base4)
   println(base5.primesSet.size)
+
+  println(base5.primesSet)
+  //Set(Set(2341, 1237, 18433, 7, 12409), Set(5701, 8389, 13, 5197, 6733))
 }
