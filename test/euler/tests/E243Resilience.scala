@@ -5,7 +5,7 @@ import euler.utils.EulerUtils
 /**
   * Created on 23/07/2016.
   */
-object Resilience extends App {
+object E243Resilience extends App {
 
   def numResilientNaive(d: BigInt) = {
     1 + ((BigInt(2) until d) count {EulerUtils.isBigCoPrime(_, d)})
@@ -59,25 +59,16 @@ object Resilience extends App {
   //    "varying" arithmetic sequence: gaps are sum of all n primes: PI[1 to n](Pr[i])
   //    each "gap" is repeated Pr[i] - 1 times.
   val result = {
-    def fuckYouScalaC(primes: Stream[Int]): Stream[BigInt] = {
-      1 #:: (fuckYouScalaC(primes) zip primes map { x => x._1 * x._2})
-    }
-
-    def fuckYouScalaC2(diffs: Stream[BigInt]): Stream[BigInt] = {
-      1 #:: (fuckYouScalaC2(diffs) zip diffs map { x => x._1 + x._2 })
-    }
-
-    def repeatXYtimes[T](diffsAndCount: (T, Int)): Seq[T] = {
+    def createRepeatedSeq[T](diffsAndCount: (T, Int)): Seq[T] = {
       List.fill(diffsAndCount._2)(diffsAndCount._1)
     }
 
     val primes: Stream[Int] = EulerUtils.naturals filter EulerUtils.sqrtPrimeCheck
     val numDuplicates: Stream[Int] = primes map {_ - 1}
-//    val diffs: Stream[Int] = 1 #:: (diffs zip primes map {tuple => tuple._1 * tuple._2})
-    val diffs: Stream[BigInt] = fuckYouScalaC(primes)
-    val actualDiffs = (diffs zip numDuplicates) flatMap repeatXYtimes
-    //    val actualSeries: Stream[Int] = 1 #:: (actualSeries zip diffs map {tuple => tuple._1 + tuple._2})
-    val actualSeries: Stream[BigInt] = fuckYouScalaC2(actualDiffs)
+    lazy val diffs: Stream[BigInt] = 1 #:: (diffs zip primes map {case (a,b) => a * b})
+    val actualDiffs: Stream[BigInt] = (diffs zip numDuplicates) flatMap createRepeatedSeq
+    lazy val actualSeries: Stream[BigInt] = 1 #:: (actualSeries zip actualDiffs map {case(a, b) => a + b})
+
     println(numDuplicates.take(10).toList)
     println(diffs.take(10).toList)
     println(actualDiffs.take(15).toList)

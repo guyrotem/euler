@@ -1,48 +1,16 @@
 package euler.utils
 
-import java.util.Date
-
 object EulerUtils {
+  def factorial(n: BigInt): BigInt = {
+    if (n <= 0) 1 else n * factorial(n-1)
+  }
+
 
   def naturalsStartingAt(num: Int): Stream[Int] = {
     num #:: naturalsStartingAt(num + 1)
   }
   val naturals: Stream[Int] = 1 #:: (naturals map {_ + 1})
   val bigNaturals: Stream[BigInt] = 1 #:: (bigNaturals map {_ + 1})
-
-  def calcOptionsPrism(numEdges: Int): Int = {
-    if (numEdges % 2 == 0) return 0
-
-    val level = (numEdges + 3) / 2
-
-    solveLevel(level)
-  }
-
-  private def solveLevel(level: Int): Int = {
-    val startTime = new Date().getTime
-
-    def getTime = {
-      new Date().getTime - startTime
-    }
-
-    println(s"level: $level @$getTime")
-    val factors = decompose(level)
-    println(s"decomposing done @$getTime")
-
-    val exitCount: Int = (level + 1)/3
-    val cVector = naturals map {x => 3*x - (level % 3)} take exitCount
-
-
-    println(s"vector created: @$getTime")
-    //  val count = cVector.count(isCoPrime(level, _))
-    val count = cVector.count { (divisor: Int) =>
-      factors forall { factor: Int =>
-        divisor % factor != 0
-      }
-    }
-    println(s"end time: @$getTime")
-    count
-  }
 
   def decompose(number: Int): Seq[Int] = {
     val maxCheck = Math.ceil(Math.sqrt(number) + 1).toInt
@@ -94,6 +62,14 @@ object EulerUtils {
 
     if (min == 0) max else gcd(max % min, min)
   }
+
+  def gcdBig(num1: BigInt, num2: BigInt): BigInt = {
+    val max = if (num1 < num2) num2 else num1
+    val min = if (num1 < num2) num1 else num2
+
+    if (min == 0) max else gcd(max % min, min)
+  }
+
 
   def shrinkNumbers(n1: Int, n2: Int): (Int, Int) = {
     val gcd1: Int = gcd(n1, n2)
