@@ -41,4 +41,10 @@ object EulerMath {
     val gcd = EulerUtils.gcdBig(n, d)
     BigFractionImpl(n / gcd, d / gcd)
   }
+
+  def totient(num: BigInt): BigInt = {
+    //  see TOTIENT FUNCTION
+    val primeFactors = EulerUtils.fullDecomposeBig(num).keys
+    num * (primeFactors map { _ - 1 }).product / primeFactors.product
+  }
 }
