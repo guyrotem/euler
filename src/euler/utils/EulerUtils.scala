@@ -115,7 +115,7 @@ object EulerUtils {
   }
 
   def bigIntSqRootCeil(x: BigInt): BigInt = {
-    BigInt(scala.math.sqrt(x.doubleValue()).toInt)
+    BigDecimal(scala.math.sqrt(x.doubleValue()).ceil).toBigInt()
   }
 
   def repeatNTimes[T](f: T => T, in: T, n: Int): T = {

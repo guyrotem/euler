@@ -15,7 +15,7 @@ object DiophantineEquation extends App {
       case (n, seq) => EulerUtils.naturals map {
         n.asFraction + DiophantineTools.calculateDiophantineSequenceValue(seq, _)
       } find {
-        case fr: Fraction => checkXYD(fr.numer1, fr.denum1, D)
+        fr: Fraction => checkXYD(fr.numer1, fr.denum1, D)
       }
     }
     fractionResult map {_.numer1} getOrElse(-1)
@@ -23,11 +23,6 @@ object DiophantineEquation extends App {
 
   def checkXYD(x: BigInt, y: BigInt, D: Int): Boolean = {
     x * x - D * y * y == 1
-  }
-
-  def isSquare(num: Int): Boolean = {
-    val sq = Math.sqrt(num).toInt
-    sq * sq == num
   }
 
   assert(EulerUtils.bigIntSqRootCeil(9) == 3)
@@ -39,7 +34,8 @@ object DiophantineEquation extends App {
 
   val allX = (1 to 1000) map findMinX
 
-  println((1 to 1000) zip allX)
   println(allX.max)
   println((allX indexOf allX.max) + 1)
+//  16421658242965910275055840472270471049
+//  661
 }

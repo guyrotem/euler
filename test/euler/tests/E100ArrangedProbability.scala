@@ -5,13 +5,11 @@ import euler.utils.EulerUtils
 /**
   * Created on 16/07/2016.
   */
-object ArrangedProbability extends App {
+object E100ArrangedProbability extends App {
   def isFiftyChance(blueDiscs: BigInt, redDiscs: BigInt): Boolean = {
-    val chance = calcChance(blueDiscs, redDiscs)
-    EulerUtils.shrinkNumbersBig(
-      chance._1,
-      chance._2
-    ) == (1, 2)
+    calcChance(blueDiscs, redDiscs) match {
+      case (n, d) => 2 * n == d
+    }
   }
 
   def calcChance(blueDiscs: BigInt, redDiscs: BigInt): (BigInt, BigInt) = {
@@ -24,11 +22,13 @@ object ArrangedProbability extends App {
 
   def findBlueDiscsPerSum(sum: BigInt): BigInt = {
     def findTheLion(blue: BigInt, leapSize: BigInt): BigInt = {
-      val chance = calcChance(blue, sum - blue)
       if (leapSize == 0) blue
-      else if (chance._1 * 2 == chance._2) blue
-      else if (chance._1 * 2 < chance._2) findTheLion(blue + leapSize, leapSize / 2)
-      else findTheLion(blue - leapSize, leapSize / 2)
+      else calcChance(blue, sum - blue) match {
+        case (n, d) =>
+          if (2 * n == d) blue
+          else if (2 * n < d) findTheLion(blue + leapSize, leapSize / 2)
+          else findTheLion(blue - leapSize, leapSize / 2)
+      }
     }
 
     findTheLion(7 * sum / 10 + 1, BigInt(1).<<(sum.bitLength - 2))
@@ -63,10 +63,10 @@ object ArrangedProbability extends App {
 //756872327473 1070379110497
 
   // NOTE: https://www.alpertron.com.ar/QUAD.HTM
-  val solStream: Stream[(BigInt, BigInt)] = (BigInt(4), BigInt(3)) #:: (solStream map {x =>
-    (
-      3*x._1 + 4*x._2 - 3,
-      2*x._1 + 3*x._2 - 2
+  val solStream: Stream[(BigInt, BigInt)] = (BigInt(4), BigInt(3)) #:: (solStream map {
+    case (x, y) => (
+      3 * x + 4 * y - 3,
+      2 * x + 3 * y - 2
       )
   })
   println(solStream find {_._1 > BigInt("1000000000000")} map {_._2})
