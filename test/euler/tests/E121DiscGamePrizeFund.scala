@@ -26,28 +26,25 @@ object E121DiscGamePrizeFund extends App {
   }
 
   private def distribution(turns: Int): Map[Int, BigFraction] = {
-    assert(turns > 0, "There must be at least 1 turn!")
     if (turns == 1) {
       Map(
         0 -> EulerMath.CreateFraction(1, 2),
         1 -> EulerMath.CreateFraction(1, 2)
       )
     } else if (turns > 1) {
-      val blueInRound = pBlueInRound(turns)
+      val blueInCurrentRound = EulerMath.CreateFraction(1, turns + 1)
       val lastDistribution = distribution(turns - 1)
 
       val pairs = (0 to turns) map {blueDiscs =>
-        blueDiscs -> ((lastDistribution.getOrElse(blueDiscs, zero) * (one - blueInRound)) + (lastDistribution.getOrElse(blueDiscs - 1, zero) * blueInRound))
+        blueDiscs ->
+          ((lastDistribution.getOrElse(blueDiscs, zero) * (one - blueInCurrentRound))
+          + (lastDistribution.getOrElse(blueDiscs - 1, zero) * blueInCurrentRound))
       }
 
       pairs.toMap
     } else {
       throw new IllegalArgumentException()
     }
-  }
-
-  private def pBlueInRound(round: Int): BigFraction = {
-    EulerMath.CreateFraction(1, round + 1)
   }
 
   assert(gameChance(1) == EulerMath.CreateFraction(1, 2))
