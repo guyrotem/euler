@@ -115,6 +115,7 @@ object EulerUtils {
   }
 
   def bigIntSqRootCeil(x: BigInt): BigInt = {
+    assert(x >= 0, "x must be >= 0")
     BigDecimal(scala.math.sqrt(x.doubleValue()).ceil).toBigInt()
   }
 

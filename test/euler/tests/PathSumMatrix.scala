@@ -41,13 +41,13 @@ object PathSumMatrix extends App {
   }
 
   def printAsMatrix(m: Seq[Double], size: Int) = {
-    (0 until size) foreach { i => (0 until size) foreach { j =>
-      print(m(i + (size + 1) * j).toString + "\t")
-    }
+    (0 until size) foreach { i =>
+      (0 until size) foreach { j =>
+        print(m(i + (size + 1) * j).toString + "\t")
+      }
       println("*")
     }
     println("≠")
-
   }
 
   val sampleMatrix = "131,201,630,537,805\n673,96,803,699,732\n234,342,746,497,524\n103,965,422,121,37\n18,150,111,956,331"

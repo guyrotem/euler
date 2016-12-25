@@ -70,4 +70,33 @@ object EulerMath {
 
     out
   }
+
+  def solveQuadraticEquation(a: Double, b: Double, c: Double): List[Double] = {
+    val delta = Math.sqrt(b*b - 4*a*c)
+    List((-b + delta) / (2 * a), (-b - delta) / (2 * a))
+  }
+
+  case class Point(x: Double, y: Double) {
+    def distanceTo(other: Point): Double = {
+      Math.sqrt(Math.pow(x - other.x, 2) + Math.pow(y - other.y, 2))
+    }
+  }
+
+  def tangentOfLine(from: Point, to: Point): Double = {
+    (to.y - from.y) / (to.x - from.x)
+  }
+
+  def calcEllipseInnerReflectionTangent(ellipseA: Double, ellipseB: Double)(lineTangent: Double, hitPoint: Point): Double = {
+    // Ellipse equation: (x / A)^2 + (y / B)^2 = 1
+    // b^2 * x^2 + a^2 * y^2 = a^2*b^2
+    // d/dx: 2b^2*x + 2a^2 * y * dy/dx = 0
+    //  => dy/dx = -(b/a)^2 * x
+    val ellipseTangent = -Math.pow(ellipseB / ellipseA, 2)
+    val tangentSlopeDegrees = Math.atan(ellipseTangent * hitPoint.x / hitPoint.y) * 180 / Math.PI
+    val currentSlopeDegrees = Math.atan(lineTangent) * 180 / Math.PI
+
+    val diff = tangentSlopeDegrees - currentSlopeDegrees
+    val nextReflectionDegrees = tangentSlopeDegrees + 90 + diff
+    -1 / Math.tan(nextReflectionDegrees * Math.PI / 180)
+  }
 }
