@@ -1,10 +1,8 @@
 package euler.problems
 
 import euler.utils.EulerUtils
+import scala.language.postfixOps
 
-/**
-  * Created on 30/07/2016.
-  */
 object E183MaximumProductOfParts {
 
   def wrapper(n: Int): Int = {

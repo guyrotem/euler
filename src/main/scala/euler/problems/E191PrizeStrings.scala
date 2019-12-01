@@ -2,9 +2,8 @@ package euler.problems
 
 import euler.utils.EulerUtils
 
-/**
-  * Created on 30/07/2016.
-  */
+import scala.language.postfixOps
+
 object E191PrizeStrings {
 
   def numberOfPrizeString(stringLength: Int): BigInt = {

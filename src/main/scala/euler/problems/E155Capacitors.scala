@@ -5,9 +5,8 @@ import euler.utils.EulerMath.BigFraction
 
 import scala.collection.mutable
 
-/**
-  * Created on 30/07/2016.
-  */
+import scala.language.postfixOps
+
 object E155Capacitors {
 
   val INITIAL_CAPACITY = EulerMath.CreateFraction(60, 1)

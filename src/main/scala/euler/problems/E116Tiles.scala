@@ -24,12 +24,12 @@ object E116Tiles extends App {
     }
   }
 
-  def countAll(totalLength: Int) = (2 to 4) map { replacementLength =>
+  def countAll(totalLength: Int) = (2 to 4).map({ replacementLength =>
     val replacementsCounter = new ReplacementsCounter(replacementLength)
-    (1 to (totalLength / replacementLength)) map { numberOfBlocks =>
+    (1 to (totalLength / replacementLength)).map({ numberOfBlocks =>
       replacementsCounter.countReplacements(totalLength, numberOfBlocks)
-    } sum
-  } sum
+    }).sum
+  }).sum
 
   assert(countAll(5) == 12)
 //  assert(countAll(50) == BigInt("20492570929"))

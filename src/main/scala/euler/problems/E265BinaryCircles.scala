@@ -1,8 +1,7 @@
 package euler.problems
 
-/**
-  * Created on 14/08/2016.
-  */
+import scala.language.postfixOps
+
 object E265BinaryCircles extends App {
   def solve(n: Int): Seq[Seq[Int]] = {
     assume(n < 31)

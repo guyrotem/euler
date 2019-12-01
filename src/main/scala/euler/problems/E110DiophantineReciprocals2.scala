@@ -1,13 +1,14 @@
 package euler.problems
 
 import euler.utils.EulerUtils
+import scala.language.postfixOps
 
 /**
   * Created on 09/09/2016.
   */
 object E110DiophantineReciprocals2 extends App {
   def numberOfSplits(n: BigInt) = {
-    val divisorsCountOfNCube = EulerUtils.fullDecomposeBig(n) map {
+    val divisorsCountOfNCube = EulerUtils.fullDecomposeBig(n).toSeq.map {
       case (_, x) => 2 * x + 1
     }
     (divisorsCountOfNCube.product + 1) / 2
@@ -22,10 +23,10 @@ object E110DiophantineReciprocals2 extends App {
   }
 
   val numberOfSolutions = series map numberOfSplits
-  println((series zip numberOfSolutions) find {_._2 > 4000000})
+  println((series zip numberOfSolutions).find(x => x._2 > 4000000))
 
   def getMaxSeries(f: BigInt => BigInt): Stream[Int] = {
-    val values = EulerUtils.bigNaturals map f zipWithIndex
+    val values = EulerUtils.bigNaturals.map(f).zipWithIndex
     lazy val outStream: Stream[(BigInt, Int)] = values.head #:: ((values.tail zip outStream) map {case(valWithIndex, lastMax) =>
       findItemBiggerThan(lastMax._1, values.drop(valWithIndex._2))
     })
@@ -37,5 +38,5 @@ object E110DiophantineReciprocals2 extends App {
   }
 
   println(series take 25 toList)
-  println(getMaxSeries(numberOfSplits) take 25 toList)
+  println(getMaxSeries(numberOfSplits).take(25).toList)
 }

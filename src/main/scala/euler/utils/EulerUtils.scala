@@ -9,8 +9,16 @@ object EulerUtils {
   def naturalsStartingAt(num: Int): Stream[Int] = {
     num #:: naturalsStartingAt(num + 1)
   }
+
+  def lazyNaturalsStartingAt(num: Int): LazyList[Int] = {
+    num #:: lazyNaturalsStartingAt(num + 1)
+  }
+
   val naturals: Stream[Int] = 1 #:: (naturals map {_ + 1})
   val bigNaturals: Stream[BigInt] = 1 #:: (bigNaturals map {_ + 1})
+
+  val lazyNaturals: LazyList[Int] = 1 #:: (lazyNaturals map {_ + 1})
+  val lazyBigNaturals: LazyList[BigInt] = 1 #:: (lazyBigNaturals map {_ + 1})
 
   def decompose(number: Int): Seq[Int] = {
     val maxCheck = Math.ceil(Math.sqrt(number) + 1).toInt
@@ -104,7 +112,10 @@ object EulerUtils {
   }
 
   def readFileFromResources(fileName: String): Seq[String] = {
-    scala.io.Source.fromFile(s"src/resources/$fileName").mkString.split("\n")
+    val source = scala.io.Source.fromFile(s"src/resources/$fileName")
+    val result = source.mkString.split("\n")
+    source.close()
+    result
   }
 
   def isCoPrime(a: Int, b: Int): Boolean = gcd(a, b) == 1
@@ -116,7 +127,7 @@ object EulerUtils {
 
   def bigIntSqRootCeil(x: BigInt): BigInt = {
     assert(x >= 0, "x must be >= 0")
-    BigDecimal(scala.math.sqrt(x.doubleValue()).ceil).toBigInt()
+    BigDecimal(scala.math.sqrt(x.doubleValue).ceil).toBigInt
   }
 
   def repeatNTimes[T](f: T => T, in: T, n: Int): T = {

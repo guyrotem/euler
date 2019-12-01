@@ -1,6 +1,7 @@
 package euler.problems
 
 import euler.utils.EulerUtils
+import scala.language.postfixOps
 
 /**
   * Created on 31/07/2016.

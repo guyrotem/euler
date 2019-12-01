@@ -99,4 +99,33 @@ object EulerMath {
     val nextReflectionDegrees = tangentSlopeDegrees + 90 + diff
     -1 / Math.tan(nextReflectionDegrees * Math.PI / 180)
   }
+
+  def makePrimeStream: Stream[Int] = {
+    EulerUtils.naturals filter EulerUtils.sqrtPrimeCheck
+  }
+
+  def powInt(base: Int, exp: Int): Int = {
+    if (exp == 0) 1
+    else if (exp % 2 == 0)
+      powInt(base * base, exp / 2)
+    else
+      base * powInt(base, exp - 1)
+  }
+
+  def powMod(base: Int, exp: Int, mod: Int): Int = {
+    if (exp == 0) 1
+    else if (exp % 2 == 0)
+      powMod(multiplyMod(base, base, mod), exp / 2, mod)
+    else
+      multiplyMod(base, powMod(base, exp - 1, mod), mod)
+  }
+
+  def multiplyMod(a: Int, b: Int, mod: Int): Int = {
+    //  assuming 2 * mod < MAXINT
+    if (b == 1) a % mod
+    else if (b % 2 == 1)
+      (a + multiplyMod(a, b - 1, mod)) % mod
+    else
+      multiplyMod((2 * a) % mod, b / 2, mod) % mod
+  }
 }

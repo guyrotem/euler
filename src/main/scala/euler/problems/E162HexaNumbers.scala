@@ -1,8 +1,7 @@
 package euler.problems
 
-/**
-  * Created on 31/07/2016.
-  */
+import scala.language.postfixOps
+
 object E162HexaNumbers {
 //  val digits13 = 13 * BigInt(13).pow(15)
 //  val digits14 = 2 * (14 * BigInt(14).pow(15) - BigInt(13).pow(16)) + 13 * (BigInt(14).pow(15) - BigInt(13).pow(15))

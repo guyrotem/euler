@@ -1,5 +1,7 @@
 package burrows_wheeler
 
+import scala.language.postfixOps
+
 object BurrowsWheeler {
   def bwMatch(bwTransform: String, pattern: String): Seq[Int] = {
     val firstColumn = bwTransform.sorted

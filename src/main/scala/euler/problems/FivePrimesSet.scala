@@ -1,10 +1,8 @@
 package euler.problems
 
 import euler.utils.EulerUtils
+import scala.language.postfixOps
 
-/**
-  * Created on 15/07/2016.
-  */
 object FivePrimesSet extends App {
 
   def makePrimeStream(numbersStream: Stream[Int]) = {

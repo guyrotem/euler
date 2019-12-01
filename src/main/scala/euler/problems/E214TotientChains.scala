@@ -12,7 +12,7 @@ object E214TotientChains extends App {
     else num +: createTotientChainBrute(EulerMath.totient(num))
   }
 
-  assume(createTotientChainBrute(5).map(_.intValue()) == Seq(5,4,2,1))
+  assume(createTotientChainBrute(5).map(_.intValue) == Seq(5,4,2,1))
 
 //  val totientChains = (BigInt(1) to 2048) map createTotientChainBrute
 

@@ -22,5 +22,5 @@ object E417RecipCycles extends App {
   assert(calcCycle(7) == 6)
   println(calcCycle(14 * 13))
 
-  println((Seq(0, 0, 0) ++ ((3 to 500) map calcCycle)) zipWithIndex)
+  println((Seq(0, 0, 0) ++ ((3 to 500) map calcCycle)).zipWithIndex)
 }

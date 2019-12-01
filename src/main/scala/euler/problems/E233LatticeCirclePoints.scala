@@ -2,9 +2,8 @@ package euler.problems
 
 import euler.utils.EulerUtils
 
-/**
-  * Created on 23/09/2016.
-  */
+import scala.language.postfixOps
+
 object E233LatticeCirclePoints extends App {
   //  circle: center(N/2, N/2), radius(SQRT(2)/2 * N)
   //  (x - N/2)^2 + (y - N/2)^2 = N^2/2
